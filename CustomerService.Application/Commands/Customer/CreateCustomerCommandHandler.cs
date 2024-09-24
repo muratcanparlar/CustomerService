@@ -18,6 +18,8 @@ public class CreateCustomerCommandHandler : ICommandHandler<CreateCustomerComman
         {
             return Result.Failure<Guid>(CustomerErrors.AlreadyUpdated);
         }
+        int a = 0;
+        var k = 5 / a;
 
         var id = Guid.NewGuid();
         return id;

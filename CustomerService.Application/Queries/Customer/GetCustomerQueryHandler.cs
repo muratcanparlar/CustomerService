@@ -9,13 +9,15 @@ public class GetCustomerQueryHandler : IQueryHandler<GetCustomerQuery, CustomerR
 {
     public async Task<Result<CustomerResponse>> Handle(GetCustomerQuery request, CancellationToken cancellationToken)
     {
-        CustomerResponse? customer = new(Guid.NewGuid(), "Murat Can", "Parlar", "canparlar@hotmail.com");
+        CustomerResponse? customer = null;
 
         if (customer is null)
         {
             return Result.Failure<CustomerResponse>(CustomerErrors.NotFound(request.CustomerId));
         }
+        customer = new(Guid.NewGuid(), "Murat Can", "Parlar", "canparlar@hotmail.com");
         await Task.CompletedTask;
+
         return customer;
     }
 }

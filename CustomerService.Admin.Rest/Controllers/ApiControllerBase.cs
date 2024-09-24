@@ -1,24 +1,22 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using CustomerService.Common;
+using CustomerService.Contracts.Responses;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace CustomerService.Common.Presentation.ApiResults
+namespace CustomerService.Admin.Rest.Controllers
 {
-    public class ApiResults
+    [ApiController]
+    public class ApiControllerBase : ControllerBase
     {
-        public static ActionResult Problem(Result result)
+        protected ActionResult ErrorResult(Result<CustomerResponse> result)
         {
-            if (result.IsSuccess)
-            {
-                throw new InvalidOperationException();
-            }
-
-            var problemDetails = new ProblemDetails
+            ProblemDetails problemDetails;
+            problemDetails = new ProblemDetails
             {
                 Detail = GetDetail(result.Error),
                 Status = GetStatusCode(result.Error.Type),
                 Title = GetTitle(result.Error),
                 Type = GetType(result.Error.Type),
-                Extensions = GetErrors(result)
             };
 
             return new ObjectResult(problemDetails)
@@ -75,9 +73,9 @@ namespace CustomerService.Common.Presentation.ApiResults
             }
 
             return new Dictionary<string, object?>
-        {
-            { "errors", validationError.Errors }
-        };
+            {
+                { "errors", validationError.Errors }
+            };
         }
     }
 }

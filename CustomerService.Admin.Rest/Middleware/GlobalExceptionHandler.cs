@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 
 namespace CustomerService.Admin.Rest.Middleware;
+
 internal sealed class GlobalExceptionHandler(ILogger<GlobalExceptionHandler> logger)
  : IExceptionHandler
 {
@@ -16,7 +17,8 @@ internal sealed class GlobalExceptionHandler(ILogger<GlobalExceptionHandler> log
         {
             Status = StatusCodes.Status500InternalServerError,
             Type = "https://datatracker.ietf.org/doc/html/rfc7231#section-6.6.1",
-            Title = "Server failure"
+            Title = "Server failure",
+            Detail = exception.Message
         };
 
         httpContext.Response.StatusCode = problemDetails.Status.Value;
@@ -26,4 +28,3 @@ internal sealed class GlobalExceptionHandler(ILogger<GlobalExceptionHandler> log
         return true;
     }
 }
-

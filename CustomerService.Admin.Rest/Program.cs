@@ -25,7 +25,7 @@ builder.Services.AddProblemDetails();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddValidatorsFromAssemblyContaining<CreateCustomerCommandValidator>();
-builder.Services.AddTransient(typeof(IPipelineBehavior<,>),typeof(ValidationBehaviour<,>));
+builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
 
 //Api Versioning
 builder.Services.AddApiVersioning(options =>
@@ -48,7 +48,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
+app.UseExceptionHandler();
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
