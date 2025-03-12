@@ -14,7 +14,7 @@ namespace CustomerService.Admin.Rest.Controllers;
 [ApiController]
 [ApiVersion("1.0")]
 [Route("api/v{version:apiVersion}/[controller]")]
-public class CustomerController(ILogger<CustomerController> logger, ISender sender) : ApiControllerBase
+public class CustomerController(ILogger<CustomerController> logger, ISender sender) : ControllerBase
 {
     private readonly ILogger<CustomerController> _logger = logger;
 
